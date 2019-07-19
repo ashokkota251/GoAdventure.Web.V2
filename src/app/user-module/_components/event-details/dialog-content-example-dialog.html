@@ -1,0 +1,11 @@
+<mat-dialog-content class="mat-typography" id="ga-eventdetails-gallery">
+    <button mat-button mat-dialog-close
+        style="position: absolute;top: 10%;right: 10%;z-index: 100000000;color: white;outline: none;font-size: 24px;"><i
+            class="fas fa-times"></i></button>
+    <ngb-carousel *ngIf="data.Data">
+        <ng-template ngbSlide *ngFor="let item of data.Data">
+            <img [src]="item.ImagePath" alt="Random first slide" class="img-thumbnail">
+        </ng-template>
+    </ngb-carousel>
+</mat-dialog-content>
+

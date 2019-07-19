@@ -1,0 +1,95 @@
+<section>
+  <button class="open-button" (click)="openForm()" *ngIf="!showConatctUsPopup">Ready To Help You</button>
+
+  <div class="ga-contact-us-container"
+    [ngClass]="{'animated slideInUp':showConatctUsPopup,' animatedslideOutRight':!showConatctUsPopup}" *ngIf="showConatctUsPopup">
+
+    <button type="button" class="close" (click)="closeForm()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h5>How can I help you?</h5>
+
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" name="Name" class="form-control text-capitalize" [(ngModel)]="Query.Name">
+    </div>
+
+    <div class="form-group">
+      <label>Mobile</label>
+      <input type="text" name="Mobile" class="form-control" [(ngModel)]="Query.Phone" (keypress)="phoneValidation($event)" minlength=10 maxlength=10>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" name="Email" class="form-control" [(ngModel)]="Query.EMail" spellcheck="false">
+    </div>
+
+    <div class="form-group">
+      <label>Message</label>
+      <textarea class="form-control" name="Message" rows="4" [(ngModel)]="Query.Query" autocomplete="off"></textarea>
+    </div>
+
+    <p style="font-size: 12px;color: red;padding-top: 5px;" *ngIf="showError">Please enter valid details</p>
+
+    <button type="submit" class="btn" (click)="onSend()">Send</button>
+  </div>
+</section>
+
+<style>
+  .open-button {
+    background-color: red;
+    color: white;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 200px;
+    z-index: 10000000000;
+    text-transform: uppercase
+  }
+
+  .ga-contact-us-container {
+    width: 350px;
+    padding: 20px 30px;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0px;
+    z-index: 10000000000;
+  }
+
+  .ga-contact-us-container .btn {
+    background-color: red;
+    color: white;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .ga-contact-us-container .btn:hover,
+  .open-button:hover {
+    opacity: 1;
+  }
+
+  .ga-contact-us-container h5 {
+    font-family: 'Raleway', sans-serif
+  }
+
+  .ga-contact-us-container .form-group {
+    margin-bottom: 5px;
+  }
+
+  .ga-contact-us-container label {
+    display: inline-block;
+    font-size: 13px;
+    margin-bottom: 0;
+    font-family: 'Raleway', sans-serif;
+  }
+</style>

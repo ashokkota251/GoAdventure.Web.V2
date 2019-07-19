@@ -1,0 +1,88 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-video-vlog-section" style="margin-top:30px;margin-bottom: 30px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <blockquote>The gladdest moment in human life is a departure into unknown lands
+          <cite>Sir Richard Burton</cite>
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/-uEhIMA_ffE" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12" style="padding-right: 0;padding-left: 0"
+        *ngFor="let item of youtubeVideos  index as i; odd as isOdd; even as isEven">
+        <div class="card" style="border-radius: 0;border: none;"
+          [ngClass]="{'video-bg-white': item.color, 'video-bg-dark': item.color}">
+          <div class="card-body row">
+            <div class="col-lg-9 col-md-7 col-xs-6 col-sm-6" style="padding-right: 0;">
+              <iframe width="384" height="216" [src]="item.youTubePath | safe" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="col-lg-3 col-md-5 col-xs-6 col-sm-6" style="padding-left: 0;padding-right: 0;">
+              <p class="video-description" [innerHTML]="item.description"></p>
+              <p class="video-description" [innerHTML]="item.location"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <ga-footer></ga-footer>
+</section>
+
+<style>
+  .ga-video-vlog-section .video-description {
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-style: italic;
+  }
+
+ 
+
+  .ga-video-vlog-section .video-bg-white {
+    background-color: #fcfcfc;
+  }
+
+  .ga-video-vlog-section .video-bg-dark {
+    background-color: #dbdbdb42;
+  }
+
+  blockquote {
+    border-left: 3px solid rgb(255, 0, 0);
+    color: #1a1a1a;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 1.25em;
+    font-style: italic;
+    line-height: 1.8em;
+    margin: 1.1em 0em;
+    padding: 1em 2em;
+    position: relative;
+    transition: 0.2s border ease-in-out;
+    z-index: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    font-size: 0.75em;
+    line-height: 1.8em;
+    margin-top: 1em;
+  }
+</style>

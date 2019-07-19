@@ -1,0 +1,57 @@
+<header class="ga-header">
+  <div class="container-fuild">
+    <nav class="navbar navbar-expand-lg navbar-light ga-nav-bar-white navbar-fixed-top">
+      <a class="navbar-brand" routerLink="/home">
+        <img class="ga-logo" src="../../assets/goadventure-log.png" alt="Go Adventure Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto main-nav" style="margin-left:100px">
+          <li class="nav-item"><a class="nav-link" routerLink="/admin" routerLinkActive="active">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/event-list" routerLinkActive="active">All Events</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/create-event" routerLinkActive="active">Create Events</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="/customise-event" routerLinkActive="active">Customise Events</a></li> -->
+          <li class="nav-item"><a class="nav-link" routerLink="/payment-list" routerLinkActive="active">Payment List</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/event-report" routerLinkActive="active">Event Report</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/add-offline-payments" routerLinkActive="active">Add Offline Payments</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/add-offline-queries" routerLinkActive="active">Add Offline Queries</a></li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" (click)="openProfile()">
+                <img src="../../../../assets/icons/profile-icon.png" style="width: 45px;cursor: pointer;">
+              </a>
+              <div class="dropdown-menu" style="font-size: 14px;right: 0;left:auto;display:block;position: absolute;"
+                *ngIf="isOpenEventsSubMenu">
+                <a class="dropdown-item ga-admin-profile"
+                  [innerHtml]="UserDetails.FirstName + ' '+ UserDetails.LastName"></a>
+                <a class="dropdown-item ga-admin-signout" (click)="Signout()">Signout</a>
+              </div>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .ga-header {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .ga-admin-profile {
+    background-color: red;
+    color: white !important
+  }
+
+  .ga-admin-signout {
+    cursor: pointer;
+  }
+</style>

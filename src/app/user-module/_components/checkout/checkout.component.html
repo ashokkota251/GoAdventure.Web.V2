@@ -1,0 +1,201 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-checkut-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-12">
+            <h5 class="secction-header">Review Your Booking</h5>
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+                    <img [src]="SelectedEventDetails.TilePhoto" style="width: 100%;height: 90px;" />
+                  </div>
+                  <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
+                    <h5 class="card-title">{{SelectedEventDetails.Title}}</h5>
+                    <h6 class="my-0">Event Date</h6>
+                    <small class="text-muted">{{SelectedEventDetails.EventDate.FromDate | date:'mediumDate'}} -
+                      {{SelectedEventDetails.EventDate.ToDate | date:'mediumDate'}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12 ga-event-details-user-info">
+            <h5 class="secction-header">Traveller Details</h5>
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Full Name *</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.FullName" tabindex="1" autofocus>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>Gender *</label>
+                    <select class="form-control" [(ngModel)]="UserDetails.Gender" tabindex="2">
+                      <option selected>Choose...</option>
+                      <option *ngFor="let item of Gender" value={{item.key}}>{{item.value}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Contact *</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.Contact" tabindex="3"
+                      (keypress)="phoneValidation($event)" minlength=10 maxlength=10>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>Email *</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.Email" tabindex="4">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>From Date</label>
+                    <input matInput [matDatepicker]="picker1" [(ngModel)]="UserDetails.DOB" name="DOB" #name="ngModel"
+                      class="form-control" style="width: 80%;display: inline-block;">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>Emergency Contact</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.EmergencyContact" tabindex="6"
+                      (keypress)="phoneValidation($event)" minlength=10 maxlength=10>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" [(ngModel)]="UserDetails.Address" tabindex="7">
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>City</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.City" tabindex="8">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>State</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.State" tabindex="9">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label>Pin Code</label>
+                    <input type="text" class="form-control" [(ngModel)]="UserDetails.PinCode" tabindex="10">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="Terms" id="rdTermsConditions">
+                    <label class="form-check-label" for="rdTermsConditions">I agree all <a class="ga-event-term"
+                        routerLink="/terms-conditions" target="_blank"> Terms and Condition</a></label>
+                  </div>
+                </div>
+                <p>* Fields are Mandatory</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <h5 class="secction-header">Fare Details</h5>
+        <div class="jumbotron jumbotron-fluid" style="padding: 1rem 0;">
+          <div class="container">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Total Amount
+                    <span style="font-size: 12px;vertical-align: initial;">({{SelectedEventDetails.BookedSlots}}
+                      Travellers) </span>
+                  </h6>
+                  <small class="text-muted">Total Event Cost</small>
+                  <small class="text-muted" style="color: black !important;font-weight: 500;">
+                    ({{SelectedEventDetails.BookedSlots}} * {{SelectedEventDetails.TravelMode.Price}})
+                  </small>
+                </div>
+                <span
+                  class="text-muted">{{SelectedEventDetails.BookedSlots * SelectedEventDetails.TravelMode.Price | indianCurrency:true:'1.0':false}}</span>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success" style="font-size: 13px;">
+                  <h6 class="my-0">Payment</h6>
+                  <small>Your Paying Amount</small>
+                  <small style="font-weight: 500;">
+                    ({{SelectedEventDetails.BookedSlots}} * {{SelectedEventDetails.SelectePrice}})
+                  </small>
+                </div>
+                <span
+                  class="text-success"  style="font-size: 13px;">{{SelectedEventDetails.BookedSlots * SelectedEventDetails.SelectePrice | indianCurrency:true:'1.0':false}}</span>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between bg-light" *ngIf="CouponAmount">
+                <div class="text-success"  style="font-size: 13px;">
+                  <h6 class="my-0">Go Adventure Promo Offer</h6>
+                </div>
+                <span class="text-success"  style="font-size: 13px;">(-) {{CouponAmount | indianCurrency:true:'1.0':false}}</span>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Amount To Pay</span>
+                <strong>
+                  {{AfterDiscountPayableAmount | indianCurrency:true:'1.0':false}}</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <h5 class="secction-header">Promo Code</h5>
+        <div class="jumbotron jumbotron-fluid" style="padding: 1rem 0;">
+          <div class="container">
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed" style="padding-bottom: 7px;">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="CouponCode" placeholder="Promo code"
+                    [(uppercase)]='CouponCode' [(ngModel)]="CouponCode">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary" (click)="checkCouponCode()" [disabled]="!CouponCode"
+                      style="background-color: red;border-color: red">Redeem</button>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between" *ngIf="!CouponAmount"
+                style="padding: 0 1.25rem;">
+                <small class="text-muted">{{CouponCodeMessage}}</small>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between bg-light" *ngIf="CouponAmount">
+                <div class="text-success">
+                  <h6 class="my-0">Promo Code</h6>
+                  <small>{{CouponCodeMessage}}</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary ga-checkout-btn" (click)="onCheckout()" [disabled]="!Terms">
+          Checkout
+          <i class="far fa-arrow-alt-circle-right" style="font-size: 23px;float: right;margin-top: 7px;"></i>
+        </button>
+
+        <p class="errorMessage" style="padding: 20px 0;color: red;">{{errorMessage}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <ga-footer></ga-footer>
+</section>

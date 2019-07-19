@@ -1,0 +1,87 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section style="margin-top: 15px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <button mat-raised-button color="primary" (click)="OpenCustomiseDialog()">Create Customise Query</button>
+        <mat-form-field style="float:right">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+            <!-- <ng-container matColumnDef="EventName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> EventName </th>
+              <td mat-cell *matCellDef="let element"> {{element.EventName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="EventDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> EventDate </th>
+              <td mat-cell *matCellDef="let element"> {{element.EventDateFrom | date:'mediumDate'}} -
+                {{element.EventDateTo | date:'mediumDate'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="CustomeEvent">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CustomeEvent </th>
+              <td mat-cell *matCellDef="let element"> {{element.CustomeEvent }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="CustomeDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CustomeDate </th>
+              <td mat-cell *matCellDef="let element"> {{element.CustomeDate}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="FullName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> FullName </th>
+              <td mat-cell *matCellDef="let element"> {{element.FullName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Mobile">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+              <td mat-cell *matCellDef="let element"> {{element.Mobile}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Message">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>
+              <td mat-cell *matCellDef="let element"> {{element.Message}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="NextCall">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> NextCall </th>
+              <td mat-cell *matCellDef="let element"> {{element.NextCall}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="CreatedDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CreatedDate </th>
+              <td mat-cell *matCellDef="let element"> {{element.CreatedDate | date:'medium'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="OpenResponseDialog(element)">Reply</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    font-size: 12px;
+  }
+</style>

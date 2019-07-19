@@ -1,0 +1,13 @@
+.btn-custome{width:200px;background-color:transparent;border:1px solid orange;border-radius:0;color:orange;font-weight:500;}
+ .btn-custome:hover{background-color:orange;color:white;}
+ label, h1{color:#5e5e5e;}
+ .fr-box.fr-basic .fr-element{color:#000;padding:16px;box-sizing:border-box;overflow-x:auto;min-height:250px;border:2px solid #ccc;}
+ .form-control{color:black !important;}
+::-webkit-input-placeholder{color:rgba(128, 128, 128, 0.15);}
+::-moz-placeholder{color:rgba(128, 128, 128, 0.15);}
+:-ms-input-placeholder{color:rgba(128, 128, 128, 0.15);}
+:-moz-placeholder{color:rgba(128, 128, 128, 0.15);}
+ .card{border:0;margin:18px 0;box-shadow:0 6px 0 0 rgba(128, 128, 128, 0.05), 0 15px 32px 0 rgba(0, 0, 0, 0.13);border-radius:4px;color:rgba(0, 0, 0, .01);padding:10px 30px !important;}
+ .card{font-size:1rem;font-weight:400;}
+ .card{position:relative;display:flex;flex-direction:column;min-width:0;word-wrap:break-word;background-clip:border-box;}
+ .content-header{font-weight:500;letter-spacing:.5px;font-size:1.6rem;margin-top:1.5rem;margin-bottom:.25rem;}

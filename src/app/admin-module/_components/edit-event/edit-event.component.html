@@ -1,0 +1,228 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-event-add-details">
+  <div class="container">
+    <div class="row">
+      <form #imageForm=ngForm name="form1" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <div class="card">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Event Title</label>
+              <input type="text" name="EventTitle" class="form-control"
+                placeholder="5 Day Backpacking Adventure in Meghalaya" [(ngModel)]="Event.Title">
+            </div>
+
+            <div class="form-group col-md-3">
+              <label>Event Type</label>
+              <select name="EventType" class="form-control" [(ngModel)]="Event.EventType"
+                (change)="onEventTypeChange($event.target.value)">
+                <option selected>Choose...</option>
+                <option *ngFor="let item of EventType" value={{item.key}}>{{item.value}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label>City</label>
+              <select name="city" class="form-control" [(ngModel)]="Event.City"
+                [disabled]="Event.EventType!=='Go Weekends'">
+                <option selected>Choose...</option>
+                <option *ngFor="let item of Cities" value={{item.key}}>{{item.value}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Tile Photo</label>
+              <input type="file" class="form-control-file" name="Image" #Image accept="image/*"
+                (change)="handleFileInput($event.target.files)"
+                style="width: 25%;display: inline-block;margin-left: 22px;" />
+              <span style="color: black">{{Event.TilePhoto}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Cover Photo</label>
+              <input type="file" class="form-control-file" name="Image" #Image accept="image/*"
+                (change)="handleFileInput1($event.target.files)"
+                style="width: 25%;display: inline-block;margin-left: 22px;" />
+              <span style="color: black">{{Event.CoverPhoto}}</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>Difficulty Level</label>
+              <select name="level" class="form-control" [(ngModel)]="Event.DifficultyLevel">
+                <option selected>Choose...</option>
+                <option *ngFor="let item of DifficultyLevel" value={{item.key}}>{{item.value}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Starting Point</label>
+              <input name="starting" type="text" class="form-control" [(ngModel)]="Event.StartingPoint">
+            </div>
+            <div class="form-group col-md-4">
+              <label>Accommodation</label>
+              <select name="Accommodation" class="form-control" [(ngModel)]="Event.Accommodation">
+                <option selected>Choose...</option>
+                <option *ngFor="let item of Accommodation" value={{item.key}}>{{item.value}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label>Trip Duration</label>
+              <input name="Trip" type="text" class="form-control" [(ngModel)]="Event.TripDuration">
+            </div>
+            <div class="form-group col-md-3">
+              <label>Altitude</label>
+              <input name="Altitude" type="text" class="form-control" [(ngModel)]="Event.Altitude">
+            </div>
+            <div class="form-group col-md-3">
+              <label>Best Season</label>
+              <input name="BestSeason" type="text" class="form-control" [(ngModel)]="Event.BestSeason">
+            </div>
+            <div class="form-group col-md-3">
+              <label>No of Slots</label>
+              <input name="NoOfSlots" type="text" class="form-control" [(ngModel)]="Event.NoOfSlots" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Note</label>
+            <textarea name="Note" class="form-control" [(ngModel)]="Event.Note"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>YouTube Video Link</label>
+            <input name="Youtube" type="text" class="form-control" [(ngModel)]="Event.YoutubeVideo" />
+          </div>
+
+          <div class="form-group">
+            <label>Route Map</label>
+            <input name="RouteMap" type="text" class="form-control" [(ngModel)]="Event.RouteMap" />
+          </div>
+
+          <div class="form-group">
+            <label>Download PDF Itinerary</label>
+            <input name="DownloadPDFItinerary" type="text" class="form-control"
+              [(ngModel)]="Event.DownloadPDFItinerary" />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="col" id="ga-event-details">
+              <ngb-tabset type="pills">
+                <ngb-tab class="nav nav-pills justify-content-start" title="Description"
+                  style="margin-bottom: 14px;font-size: 14px;">
+                  <ng-template ngbTabContent>
+                    <div name="Description" [ngxSummernote] [(ngModel)]="Event.Description"></div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab class="nav nav-pills justify-content-start" title="Itinerary">
+                  <ng-template ngbTabContent>
+                    <div name="Itinerary" [ngxSummernote] [(ngModel)]="Event.Itinerary"></div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab class="nav nav-pills justify-content-start" title="Things To Bring">
+                  <ng-template ngbTabContent>
+                    <div name="ThingsToBring" [ngxSummernote] [(ngModel)]="Event.ThingsToBring"></div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab class="nav nav-pills justify-content-start" title="Includes">
+                  <ng-template ngbTabContent>
+                    <div name="Includes" [ngxSummernote] [(ngModel)]="Event.Includes"></div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab class="nav nav-pills justify-content-start" title="Excludes">
+                  <ng-template ngbTabContent>
+                    <div name="Excludes" [ngxSummernote] [(ngModel)]="Event.Excludes"></div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab class="nav nav-pills justify-content-start" title="Suggestions">
+                  <ng-template ngbTabContent>
+                    <div name="Suggestions" [ngxSummernote] [(ngModel)]="Event.Suggestions"></div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <form #formRef="ngForm" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="form-row">
+                <div class="form-group col-md-3" style="color: black;">From Date</div>
+                <div class="form-group col-md-3" style="color: black;">To Date</div>
+                <div class="form-group col-md-2" style="color: black;">Delete</div>
+              </div>
+
+              <div class="form-row" *ngFor="let item of EventDates; let in=index">
+                <div class="form-group col-md-3">
+                  <input matInput [matDatepicker]="picker1" [value]="EventDates[in].FromDate"
+                    [(ngModel)]="EventDates[in].FromDate" name="from{{in}}" #name="ngModel" class="form-control"
+                    style="width: 60%;display: inline-block;" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <input matInput [matDatepicker]="picker2" [value]="EventDates[in].ToDate"
+                    [(ngModel)]="EventDates[in].ToDate" name="to{{in}}" #name="ngModel" class="form-control"
+                    style="width: 60%;display: inline-block;" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </div>
+                <div class="form-group col-md-2">
+                  <input type="checkbox" [checked]="EventDates[in].isDelete"
+                    (change)="onDateDelete(in, EventDates[in].isDelete)" style="margin-left: 15px;" />
+                </div>
+              </div>
+
+              <button mat-button class="btn btn-primary btn-custome" [disabled]="!formRef.form.valid"
+                (click)="addNewEventDate()">Add New Event data</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <form #formRef1="ngForm">
+            <label>Travel Type & Price</label>
+            <div class=" orm-row row" *ngFor="let item of TravelPrice; let in=index">
+              <div class="form-group col-3">
+                <label>Travel Mode</label>
+                <input type="text" [(ngModel)]="TravelPrice[in].TravelMode" name="TravelMode{{in}}" class="form-control"
+                  #name="ngModel" required />
+              </div>
+              <div class="form-group col-3">
+                <label>Price</label>
+                <input type="text" [(ngModel)]="TravelPrice[in].Price" name="Price{{in}}" class="form-control"
+                  #name="ngModel" required />
+              </div>
+              <div class="form-group col-3">
+                <label>Minmum Price</label>
+                <input type="text" [(ngModel)]="TravelPrice[in].MinPrice" name="MinPrice{{in}}" class="form-control"
+                  #name="ngModel" required />
+              </div>
+            </div>
+            <button mat-button class="btn btn-primary btn-custome" [disabled]="!formRef1.form.valid"
+              (click)="addNewTravelPrice()">Add New Travel Type</button>
+          </form>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button type="button" mat-button class="btn btn-primary btn-custome pull-right" style="width:200px"
+              (click)="onSave()">Save Event Details</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+

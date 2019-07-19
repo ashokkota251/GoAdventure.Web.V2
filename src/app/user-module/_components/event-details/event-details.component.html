@@ -1,0 +1,517 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-eventdetails-sections" id="ga-eventdetails-section"
+  [ngStyle]="{'background-image': 'url('+eventDetail.CoverPhoto+')'}">
+  <div class="container-fluid">
+    <div class="row row justify-content-between">
+      <div class="col-lg-6 col-md-4 col-xs-12 col-sm-12">
+        <div class="jumbotron jumbotron ga-eventdetails-title-section">
+          <div class="container">
+            <p>{{eventDetail.Title}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-7 col-xs-12 col-sm-12">
+        <div class="jumbotron ga-eventdetails-booking-selection">
+          <div class="container">
+            <h4 class="title">Book Your Trip</h4>
+            <div class="form-group">
+              <label class="label">Event Dates</label>
+              <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" (click)="openDateDropDown()" *ngIf="eventDates.length>0" style="font-size: 13px;">
+                  <span *ngIf="(selectedDate | json) == '{}'">Select Your Trip Date </span>
+                  <span *ngIf="(selectedDate | json) != '{}'">{{selectedDate.FromDate | date:'mediumDate'}} -
+                    {{selectedDate.ToDate | date:'mediumDate'}}</span>
+                </button>
+
+                <button type="button" class="btn btn-primary dropdown-toggle" *ngIf="eventDates.length==0">
+                  <span style="font-size: 13px;">Coming Soon </span>
+                </button>
+
+                <div class="dropdown-menu" style="max-height: 320px;overflow-x: auto;border-radius:0;display:block;position: absolute;top: 43px;font-size: 13px;" *ngIf="isOpenDateDropdown" >
+                  <div *ngFor="let item of eventDates">
+                    <a class="dropdown-item disabled" *ngIf="item.AvailableSlots===item.BookedSlots" style="cursor: pointer;">
+                      <table style="width:100%">
+                        <tr>
+                          <td style="width:150px">{{item.FromDate | date:'mediumDate'}}</td>
+                          <td style="width:40px">-</td>
+                          <td style="width:150px">{{item.ToDate | date:'mediumDate'}}</td>
+                          <td
+                            title="Sign up your details for us to contact in case of any cancellations of booked slots">
+                            <div style="font-size: 10px;background: #ccc;color: black;padding: 3px 4px;width: 70px;
+                            float: right;">Waiting List</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </a>
+                    <a class="dropdown-item" *ngIf="item.AvailableSlots!==item.BookedSlots" style="color:green"
+                      (click)="onDateChange(item)">
+                      <table style="width:100%">
+                        <tr>
+                          <td style="width:150px">{{item.FromDate | date:'mediumDate'}}</td>
+                          <td style="width:40px">-</td>
+                          <td style="width:150px">{{item.ToDate | date:'mediumDate'}}</td>
+                          <td>
+                            <div style="font-size: 10px;background: #008000ab;color: white;padding: 3px 4px;width: 70px;
+                            float: right;">
+                              Slots Available</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </a>
+                  </div>
+                </div>
+
+
+                <div class="form-group" *ngIf="dispalyTravelMode.length>0">
+                  <label>Traveller Mode</label>
+                  <select class="form-control" (change)="onTravelChange($event.target.value)">
+                    <option *ngFor="let item of eventTravelPrice" value={{item.TravelMode}}>{{item.TravelMode}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Price (Per Person)</label>
+                  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="PriceBtn"
+                    style="display:block;">
+                    <label ngbButtonLabel class="btn-primary" [ngClass]="{'price-selected':PriceBtn,'price':!PriceBtn}">
+                      <input ngbButton type="radio" name="payment" [value]="true">
+                      {{tokenAmount | indianCurrency:true:'1.0':false}}
+                      <br /><span style="font-size: 11px;margin-left: -10px;">(Deposit)</span>
+                    </label>
+
+                    <label ngbButtonLabel class="btn-primary" [ngClass]="{'price-selected':!PriceBtn,'price':PriceBtn}">
+                      <input ngbButton type="radio" name="payment" [value]="false">
+                      {{fullAmount | indianCurrency:true:'1.0':false}}
+                      <br /><span style="font-size: 11px;margin-left: -10px;">(Pay Full)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Adults</label>
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" [disabled]="BookedSlots===1"
+                        (click)="minusAdultCount()">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </span>
+                    <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="8"
+                      [(ngModel)]="BookedSlots" readonly>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" [disabled]="BookedSlots===8"
+                        (click)="plusAdultCount()">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-booking" (click)="checkout()">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ga-event-details-full-page">
+  <div class="container">
+    <div class="row ga-event-details-icons ga-eventdetails-icons">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 text-center">
+        <div class="ga-details-icons">
+          <img src="../../assets/level-1.png" *ngIf='eventDetail.DifficultyLevel==="Easy"'>
+          <img src="../../assets/level-2.png" *ngIf='eventDetail.DifficultyLevel==="Moderate"'>
+          <img src="../../assets/level-3.png" *ngIf='eventDetail.DifficultyLevel==="Difficult"'>
+          <h5 class="card-title">{{eventDetail.DifficultyLevel? eventDetail.DifficultyLevel: 'N/A'}}</h5>
+        </div>
+        <div class="ga-details-icons">
+          <img src="../../assets/starting-point.png" alt="Card image cap">
+          <h5 class="card-title">{{eventDetail.StartingPoint? eventDetail.StartingPoint: 'N/A'}}</h5>
+        </div>
+        <div class="ga-details-icons">
+          <img src="../../assets/accommodation1.png" *ngIf='eventDetail.Accommodation==="Homestay"'>
+          <img src="../../assets/accommodation2.png" *ngIf='eventDetail.Accommodation==="Camping"'>
+          <h5 class="card-title">{{eventDetail.Accommodation? eventDetail.Accommodation: 'N/A'}}</h5>
+        </div>
+        <div class="ga-details-icons">
+          <img src="../../assets/trip-duration.png" alt="Card image cap">
+          <h5 class="card-title">{{eventDetail.TripDuration? eventDetail.TripDuration: 'N/A'}}</h5>
+        </div>
+        <div class="ga-details-icons">
+          <img src="../../assets/altitude.png" alt="Card image cap">
+          <h5 class="card-title">{{eventDetail.Altitude? eventDetail.Altitude: 'N/A'}}</h5>
+        </div>
+        <div class="ga-details-icons">
+          <img src="../../assets/season.png" alt="Card image cap">
+          <h5 class="card-title">{{eventDetail.BestSeason? eventDetail.BestSeason: 'N/A'}}</h5>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12 ">
+        <div class="row ga-eventdetails-about">
+          <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 text-center">
+            <ul class="nav nav-pills mb-3 ga-event-details-nav-pils" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab1'}" (click)="onClickTabs('tab1')">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab2'}" (click)="onClickTabs('tab2')">Itinerary</a>
+              </li>
+              <li class="nav-item" *ngIf="eventDetail.ThingsToBring">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab3'}" (click)="onClickTabs('tab3')">Things To Bring</a>
+              </li>
+              <li class="nav-item" *ngIf="eventDetail.Includes">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab4'}" (click)="onClickTabs('tab4')">Includes</a>
+              </li>
+              <li class="nav-item" *ngIf="eventDetail.Excludes">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab5'}" (click)="onClickTabs('tab5')">Excludes</a>
+              </li>
+              <li class="nav-item" *ngIf="eventDetail.Suggestions">
+                <a class="nav-link" [ngClass]="{'active': activeTab==='tab6'}" (click)="onClickTabs('tab6')">Suggestions</a>
+              </li>
+            </ul>
+            <div class="tab-content card ga-event-details-nav-content" id="pills-tabContent">
+              <div class="row" *ngIf="activeTab==='tab1'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.Description">
+                  <p class="content" [innerHTML]="eventDetail.Description"></p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="activeTab==='tab2'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.Itinerary">
+                  <p class="content" [innerHTML]="eventDetail.Itinerary"></p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="activeTab==='tab3'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.ThingsToBring">
+                  <p class="content" [innerHTML]="eventDetail.ThingsToBring"></p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="activeTab==='tab4'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.Includes">
+                  <p class="content" [innerHTML]="eventDetail.Includes"></p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="activeTab==='tab5'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.Excludes">
+                  <p class="content" [innerHTML]="eventDetail.Excludes"></p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="activeTab==='tab6'">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="eventDetail.Suggestions">
+                  <p class="content" [innerHTML]="eventDetail.Suggestions"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="images" style="margin-top: 5%">
+          <div class="col-md-4 col-lg-4" *ngFor="let item of images | slice:0:9; let i=index"
+            style="margin-bottom: 15px">
+            <div class="thumbnail img-hover-zoom img-hover-zoom--brightness">
+              <img [src]="item.ImagePath" (click)="openDialog(item)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+        <div class="card ga-details-avilable-date">
+          <div class="card-body ">
+            <p class="ga-details-avilable-date-header">Available Dates</p>
+            <ul class="list-group list-group-flush" style="font-size: 13px;" *ngIf="eventDates.length!=0">
+              <li class="list-group-item list-group-item-action" *ngFor="let item of eventDates">
+                <span>{{item.FromDate | date:'mediumDate'}}</span>
+                <span>-</span>
+                <span>{{item.ToDate | date:'mediumDate'}}</span>
+                <div style="font-size: 10px;background: green;color: white;padding: 3px 4px;width: auto;
+                float: right;">Available</div>
+              </li>
+            </ul>
+
+            <ul class="list-group list-group-flush" style="font-size: 13px;" *ngIf="eventDates.length==0">
+              <li class="list-group-item list-group-item-action" style="font-size: 14px">Coming Soon</li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div style="width: 100%">
+          <a class="pdf-download" class="btn btn-primary ga-btn-pdf"
+            href="https://drive.google.com/file/d/1cPlgiBcVWEOl8tUbYDtGv-bxYzxLcR2o/view" target="_blank">Download PDF
+            Itinerary</a>
+        </div>
+        <section class="ga-blog-section">
+          <div class="ga-image-over-grid-hover">
+            <figure class="ga-image-over-effect">
+              <img alt="img11" src="../../../../assets/blog-kedarkantha.jpg" class="img-responsive">
+              <figcaption>
+                <div>
+                  <a [routerLink]="['/blog-details',1]">Read More</a>
+                </div>
+                <h2><span> Kedarkantha </span>trek</h2>
+              </figcaption>
+            </figure>
+          </div>
+        </section> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="ga-eventdetails-map-video">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <img src="../../../../assets/sample-route-map.jpg" class="img-fluid">
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <iframe src="https://www.youtube.com/embed/gGVnScX4jI4" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<section>
+  <ga-footer></ga-footer>
+</section>
+
+<!-- <section class="ga-event-details-price-fixed-bottom d-none d-sm-block d-md-none">
+  <h1>Hello</h1>
+</section> -->
+
+<style>
+  .img-hover-zoom {
+    overflow: hidden;
+  }
+
+  .img-hover-zoom--brightness img {
+    transition: transform 2s, filter 1.5s ease-in-out;
+    transform-origin: center center;
+    filter: brightness(50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .img-hover-zoom--brightness:hover img {
+    filter: brightness(100%);
+    transform: scale(1.3);
+  }
+</style>
+
+<style>
+  .ga-eventdetails-about {
+    margin-top: 2%;
+    background-image: url('../../../../assets/bg-world-map.png');
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-attachment: fixed;
+  }
+
+  .ga-eventdetails-about .head-line {
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .ga-eventdetails-about .content {
+    font-family: 'Lato', sans-serif;
+    text-align: justify;
+    font-size: 16px;
+    color: #000000c2;
+    letter-spacing: .014em;
+    padding: 8px 0;
+  }
+
+  .ga-eventdetails-about .pdf-download {
+    margin-left: 23px;
+    background-color: red;
+    padding: 9px;
+    color: white;
+    float: right;
+    text-decoration: none;
+  }
+
+  .ga-eventdetails-about .pdf-download:hover {
+    background-color: rgba(255, 0, 0, 0.856);
+  }
+
+  .ga-eventdetails-map-video {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .ga-eventdetails-map-video img {
+    border: 4px solid #cccccc38;
+    width: 100%;
+  }
+
+  .ga-eventdetails-map-video iframe {
+    border: 4px solid #ccccccbd;
+    width: 100%;
+    height: 500px;
+    margin-top: 2%;
+  }
+
+  button.btn.btn-primary.dropdown-toggle {
+    background-color: #ffffff00;
+    padding: 2px 12px;
+    border: 1px solid white;
+    height: 45px;
+    width: 100%;
+    text-align: left;
+  }
+
+  button.btn.btn-primary.dropdown-toggle::after {
+    float: right;
+    margin-top: 12px;
+  }
+
+  .ga-event-details-nav-pils {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    border: 0;
+    padding: .7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: -20px !important;
+    background-color: #ff0000;
+    z-index: 1;
+    position: relative;
+    -webkit-border-radius: .25rem;
+    border-radius: .25rem;
+  }
+
+  .ga-event-details-nav-content {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    border: 0;
+    font-weight: 400;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+
+  .ga-event-details-nav-pils .nav-link {
+    padding: 10px 20px;
+    margin-right: 10px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .ga-event-details-nav-pils .nav-link.active {
+    background-color: white;
+    color: black;
+  }
+
+  .ga-details-avilable-date-header {
+    padding: 9px 18px;
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .ga-details-avilable-date {
+    padding: 0;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    border: 0;
+    margin-top: 20px;
+  }
+
+  .ga-details-avilable-date .card-body {
+    padding: 0;
+
+  }
+
+  .ga-details-avilable-date .list-group-item {
+    padding: 0.5rem 1rem;
+  }
+
+  .ga-btn-pdf,
+  .ga-btn-pdf:active {
+    width: 100%;
+    background-color: red !important;
+    border: red;
+    padding: 10px;
+    margin-top: 15px;
+  }
+
+  .ga-btn-pdf:hover {
+    background-color: rgba(255, 0, 0, 0.575);
+  }
+
+  .ga-event-details-full-page {
+    background: url('../../assets/bg-world-map.png');
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .ga-blog-section {
+    padding: 1em 0;
+    position: relative;
+  }
+
+  .ga-blog-section .ga-image-over-grid-hover {
+    position: relative;
+    margin: 0 auto;
+    padding: 0em 0 0em;
+    list-style: none;
+  }
+
+  .ga-blog-section .ga-image-over-grid-hover figure {
+    position: relative;
+    overflow: hidden;
+    margin: 0px 1%;
+    min-width: auto;
+    max-height: 360px;
+    background: #3085a3;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  @media (min-width: 1200px) {
+    .ga-event-details-full-page .container {
+      max-width: 1300px;
+    }
+  }
+</style>
+
+<style>
+  .ga-event-details-price-fixed-bottom {
+    background-color: red;
+    color: white;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 200px;
+    z-index: 10000000000;
+  }
+</style>

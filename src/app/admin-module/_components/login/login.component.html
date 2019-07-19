@@ -1,0 +1,173 @@
+<section class="bg">
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+      <div class="col-md-4 col-md-offset-4 login-div">
+        <div class="text-center">
+          <img src="../../../../assets/Goadventure-White1-logo.png" style="width: 150px">
+        </div>
+        <h2 class="login-title">Sign In To Admin</h2>
+        <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate style="margin: 4rem auto;">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
+              required autocomplete="off" placeholder="Email Id" />
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+              required autocomplete="off" placeholder="Password" />
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+          </div>
+          <div class="form-group text-center">
+            <button [disabled]="loading" class="btn btn-primary btn-login">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  .login-div {
+    padding: 4% 2rem 1rem 2rem;
+    margin: 0 auto 2rem auto;
+    overflow: hidden;
+  }
+
+  .login-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    font-size: 18px;
+
+  }
+
+  .card {
+    padding: 50px;
+  }
+
+  .bg {
+    background-color: #f9f9fc;
+    background-position: auto top;
+    background-repeat: no-repeat;
+    background-image: url(../../../../assets/login-bg.jpg);
+    background-position: center top;
+    height: 100vh;
+  }
+
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.3rem + 2px);
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e2e5ec;
+    border-radius: 4px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .form-control {
+      -webkit-transition: none;
+      transition: none;
+    }
+  }
+
+  .form-control::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  .form-control:focus{
+    color: white !important;
+    background: rgba(67, 34, 167, 0.4);
+    border-color: #7096f6;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25);
+  }
+
+  .form-control::-webkit-input-placeholder {
+    color: #a7abc3;
+    opacity: 1;
+  }
+
+  .form-control:-ms-input-placeholder {
+    color: #a7abc3;
+    opacity: 1;
+  }
+
+  .form-control::-ms-input-placeholder {
+    color: #a7abc3;
+    opacity: 1;
+  }
+
+  .form-control::placeholder {
+    color: #a7abc3;
+    opacity: 1;
+  }
+
+  .form-control:disabled,
+  .form-control[readonly] {
+    background-color: #f7f8fa;
+    opacity: 1;
+  }
+
+  .form-control {
+    height: 46px;
+    border-radius: 46px !important;
+    border: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-top: 1.5rem;
+    background: rgba(67, 34, 167, 0.4);
+    color: white;
+  }
+
+  .form-control::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+  }
+
+  .form-control:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .form-control::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .btn-login {
+    height: 46px;
+    display: inline-block;
+    text-align: center;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin-top: 10%;
+    border-radius: 60px !important;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .btn-login:active{
+    background-color: red !important
+  }
+
+  .help-block {
+    padding-left: 25px;
+    color: white;
+    font-size: 12px;
+  }
+</style>

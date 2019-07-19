@@ -1,0 +1,156 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section style="margin-top: 20px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Event Name</label>
+          <div class="col-sm-8">
+            <select name="EventName" class="form-control" [(ngModel)]="Transaction.EventId"
+              (change)="onEventNameChange(Transaction.EventId)">
+              <option selected>Choose...</option>
+              <option *ngFor="let item of EventNames" value={{item.Id}}>{{item.Name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Date</label>
+          <div class="col-sm-10">
+            <select name="EventName" class="form-control" [(ngModel)]="Transaction.EventDateId">
+              <option selected>Choose...</option>
+              <option *ngFor="let item of EventDates" value={{item.EventDatesId}}>{{item.FromDate | date:'mediumDate'}}
+                - {{item.ToDate | date:'mediumDate'}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6" *ngIf="EventTravelPrice.length>1">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Traveller</label>
+          <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="TravelMode">
+              <option *ngFor="let item of EventTravelPrice" value={{item.TravelMode}}>{{item.TravelMode}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Full Name</label>
+        <input type="text" class="form-control" autocomplete="off" [(ngModel)]="Transaction.UserName">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Email</label>
+        <input type="text" class="form-control" autocomplete="off" [(ngModel)]="Transaction.UserEmail">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="inputAddress">Phone</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.UserContact">
+      </div>
+      <div class="form-group  col-md-4">
+        <label for="inputAddress2">DOB</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.DOB">
+      </div>
+      <div class="form-group  col-md-4">
+        <label for="inputAddress2">Gender</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.Gender">
+      </div>
+
+
+      <div class="form-group col-md-3">
+        <label for="inputAddress">Order Id</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.OrderId">
+      </div>
+      <div class="form-group  col-md-3">
+        <label for="inputAddress2">Paid Amount without Discount</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.PaymentReceived">
+      </div>
+      <div class="form-group  col-md-3">
+        <label for="inputAddress2">Discount Amount</label>
+        <input type="text" class="form-control" [(ngModel)]="Discount">
+      </div>
+      <div class="form-group  col-md-3">
+        <label for="inputAddress2">No of Slots</label>
+        <input type="text" class="form-control" [(ngModel)]="Transaction.BookedSlots">
+      </div>
+
+
+      <div class="col-lg-3">
+        <label>Payment Platform : </label>
+        <div style="display: block;margin-left: 10px;">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Instamojo"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Instamojo</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Google Pay"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Google Pay</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="PayTM"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">PayTM</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Phone Pay"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Phone Pay</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Internet Banking"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Internet Banking</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <label>Information Platform : </label>
+        <div style="display: block;margin-left: 10px;">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="InfoPlatform" value="Facebook"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Facebook</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Instagram"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Instagram</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Meetup"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Meetup</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaymentPlatform" value="Friends"
+              [(ngModel)]="Transaction.PaymentPlatform">
+            <label class="form-check-label">Friends</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <button type="button" class="btn btn-primary float-right" (click)="save(Discount, TravelMode)">Save</button>
+      </div>
+    </div>
+  </div>
+</section>

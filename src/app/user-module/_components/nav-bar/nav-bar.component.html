@@ -1,0 +1,249 @@
+<header class="ga-header">
+  <div class="container-fluid ga-container">
+    <nav class="navbar navbar-expand-lg navbar-light ga-nav-bar-white">
+      <a class="navbar-brand" routerLink="/home">
+        <img class="ga-logo" src="../../assets/goadventure-log.png" alt="Go Adventure Logo">
+      </a>
+      <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+        <ul class="navbar-nav mr-auto main-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  (click)="openEventsMenu()">
+              Events
+            </a>
+            <div class="dropdown-menu" style="font-size: 14px;left: 13px;display:block;position: absolute;"  *ngIf="isOpenEventsSubMenu">
+              <a class="dropdown-item" style="padding: .25rem 1rem;" routerLink="/go-backpacking" routerLinkActive="active">Go Backpacking</a>
+              <a class="dropdown-item" style="padding: .25rem 1rem;" routerLink="/go-himalaya" routerLinkActive="active">Go Himalayas</a>
+              <a class="dropdown-item" style="padding: .25rem 1rem;" routerLink="/go-international" routerLinkActive="active">Go InternationalL</a>
+              <a class="dropdown-item" style="padding: .25rem 1rem;" routerLink="/go-all-events" routerLinkActive="active">All Events</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/go-weekend" routerLinkActive="active" class="nav-link">Go Weekends</a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a routerLink="/go-customise" routerLinkActive="active" class="nav-link">Go Customise</a>
+          </li> -->
+
+          <li class="nav-item">
+            <a routerLink="/calendar" routerLinkActive="active" class="nav-link">Calendar</a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/video-log" routerLinkActive="active">Video-log</a>
+          </li>
+
+        </ul>
+
+        <!-- <ul class="navbar-nav pull-right">
+          <li class="nav-item ">
+            <a class="nav-link" routerLink="/reach-us" routerLinkActive="active">Login / Sign Up</a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
+
+
+  </div>
+</header>
+
+
+<style>
+  .ga-header {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .ga-nav-bar-white .nav-link {
+    font-size: 12px;
+    margin: 0 8px;
+    color: black !important;
+    font-weight: 900;
+    border-bottom: 2px solid transparent
+  }
+  .ga-nav-bar-white .nav-link {
+    font-size: 14px !important;
+  }
+
+  .ga-nav-bar-white .main-nav .nav-link.active,
+  .ga-nav-bar-white .main-nav .nav-link:hover {
+    border-bottom: 2px solid red
+  }
+
+  #menu ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  #menu .main-menu {
+    display: none;
+  }
+
+  #tm:checked+.main-menu {
+    display: block;
+  }
+
+  #menu input[type="checkbox"],
+  #menu ul span.drop-icon {
+    display: none;
+  }
+
+  #menu li,
+  #toggle-menu,
+  #menu .sub-menu {
+    border-style: solid;
+    border-color: rgba(0, 0, 0, .05);
+  }
+
+  #menu li,
+  #toggle-menu {
+    border-width: 0 0 1px;
+  }
+
+  #menu .sub-menu {
+    background-color: #444;
+    border-width: 1px 1px 0;
+    margin: 0 1em;
+  }
+
+  #menu .sub-menu li:last-child {
+    border-width: 0;
+  }
+
+  #menu li,
+  #toggle-menu,
+  #menu a {
+    position: relative;
+    display: block;
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
+  }
+
+  #menu,
+  #toggle-menu {
+    background-color: #09c;
+  }
+
+  #toggle-menu,
+  #menu a {
+    padding: 1em 1.5em;
+  }
+
+  #menu a {
+    transition: all .125s ease-in-out;
+    -webkit-transition: all .125s ease-in-out;
+  }
+
+  #menu a:hover {
+    background-color: white;
+    color: #09c;
+  }
+
+  #menu .sub-menu {
+    display: none;
+  }
+
+  #menu input[type="checkbox"]:checked+.sub-menu {
+    display: block;
+  }
+
+  #menu .sub-menu a:hover {
+    color: #444;
+  }
+
+  #toggle-menu .drop-icon,
+  #menu li label.drop-icon {
+    position: absolute;
+    right: 1.5em;
+    top: 1.25em;
+  }
+
+  #menu label.drop-icon,
+  #toggle-menu span.drop-icon {
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .125);
+    text-shadow: 0 0 0 transparent;
+    color: rgba(255, 255, 255, .75);
+  }
+
+  #menu .drop-icon {
+    line-height: 1;
+  }
+
+  @media only screen and (max-width: 64em) and (min-width: 52.01em) {
+    #menu li {
+      width: 33.333%;
+    }
+
+    #menu .sub-menu li {
+      width: auto;
+    }
+  }
+
+  @media only screen and (min-width: 52em) {
+    #menu .main-menu {
+      display: block;
+    }
+
+    #toggle-menu,
+    #menu label.drop-icon {
+      display: none;
+    }
+
+    #menu ul span.drop-icon {
+      display: inline-block;
+    }
+
+    #menu li {
+      float: left;
+      border-width: 0 1px 0 0;
+    }
+
+    #menu .sub-menu li {
+      float: none;
+    }
+
+    #menu .sub-menu {
+      border-width: 0;
+      margin: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 12em;
+      z-index: 3000;
+    }
+
+    #menu .sub-menu,
+    #menu input[type="checkbox"]:checked+.sub-menu {
+      display: none;
+    }
+
+    #menu .sub-menu li {
+      border-width: 0 0 1px;
+    }
+
+    #menu .sub-menu .sub-menu {
+      top: 0;
+      left: 100%;
+    }
+
+    #menu li:hover>input[type="checkbox"]+.sub-menu {
+      display: block;
+    }
+  }
+</style>

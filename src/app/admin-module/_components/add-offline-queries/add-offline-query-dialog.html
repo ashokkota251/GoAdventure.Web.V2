@@ -1,0 +1,119 @@
+<div class="container" style="overflow-y: auto;height:600px">
+    <div class="row">
+        <div class="col-lg-12" style="padding: 20px 15px;background: red;color: white;text-align: center;">
+            <h5>Reply to Cutomer</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12" style="padding: 20px 15px;">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.FullName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.Email">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Contact Number</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.Mobile" (keypress)="phoneValidation($event)" minlength=10 maxlength=10>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Gender </label>
+                    <select class="form-control" [(ngModel)]="QueryData.Gender" tabindex="2">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let item of Gender" value={{item.key}}>{{item.value}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>City </label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.City">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Number of Travellers </label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.NoOfTravellers">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                        [(ngModel)]="SelectedEventType">
+                        <mat-radio-button class="example-radio-button" *ngFor="let item of EventTypes"
+                            [value]="item.key" style="margin-right:10px" (change)="changeEventTypes(item.value)">
+                            {{item.value}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="form-row" *ngIf="SelectedEventType==1">
+                <div class="form-group col-md-6">
+                    <label>Events</label>
+                    <select name="EventName" class="form-control" [(ngModel)]="QueryData.EventId"
+                        (change)="onEventNameChange(QueryData.EventId)">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let item of EventNames" value={{item.Id}}>{{item.Name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Dates</label>
+                    <select name="EventName" class="form-control" [(ngModel)]="QueryData.EventDateId">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let item of EventDates" value={{item.EventDatesId}}>
+                            {{item.FromDate | date:'mediumDate'}}
+                            - {{item.ToDate | date:'mediumDate'}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row" *ngIf="SelectedEventType==2">
+                <div class="form-group col-md-6">
+                    <label>Custome Event</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.CustomeEvent">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Custome Date</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.CustomeDate">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Schedule of next call/reminder</label>
+                    <input type="text" class="form-control" [(ngModel)]="QueryData.NextCall">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Message</label>
+                    <textarea class="form-control" [(ngModel)]="QueryData.Message"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="QueryData.EventId!=undefined">
+        <div class="col-lg-12" style="padding:15px 15px;" *ngFor="let item of SubQueries; let in=index">
+            <label>Step-{{in + 1}}</label>
+            <textarea [(ngModel)]="SubQueries[in].Value" name="name{{in}}" class="form-control" #name="ngModel"
+                [disabled]="SubQueries[in].ReadOnly"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12" style="padding:0 15px;">
+            <button mat-raised-button color="primary" (click)="saveData()" style="float: right">Submit</button>
+            <button mat-raised-button color="primary" (click)="OpenWhatsApp(QueryData.Mobile)" style="float: right;margin-right: 15px;">Open Whatsapp</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,245 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section style="margin-top:30px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="nav nav-pills mb-3 ga-event-details-nav-pils" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab==='tab1'}" (click)="onClickTabs('tab1')">Go
+              Backpacking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab==='tab2'}" (click)="onClickTabs('tab2')">Go
+              International</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab==='tab3'}" (click)="onClickTabs('tab3')">Go Himalaya</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab==='tab4'}" (click)="onClickTabs('tab4')">Go
+              Customise</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab==='tab5'}" (click)="onClickTabs('tab5')">Go Weekends</a>
+          </li>
+
+        </ul>
+        <div class="tab-content card ga-event-details-nav-content" id="pills-tabContent">
+          <div class="row" *ngIf="activeTab==='tab1'">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th style="width: 120px;text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of GoBackPacking;let i = index">
+                  <td>{{item.Title}}</td>
+                  <td style="text-align:center">
+                    <a [routerLink]="['/event-details', item.Suggestions]" class="ga-btn-img">
+                      <img src="../../assets/view-icon.png" style="width: 15px;" />
+                    </a>
+
+                    <button type="button" class="ga-btn-img" (click)="onEdit(item.Id)">
+                      <img src="../../assets/edit-icon.png" style="width: 15px;" />
+                    </button>
+
+                    <button type="button" class="ga-btn-img" (click)="onDelete(item.Id, i)">
+                      <img src="../../assets/delete-icon.png" style="width: 15px;" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" *ngIf="activeTab==='tab2'">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th style="width: 120px;text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of GoInternational;let i = index">
+                  <td>{{item.Title}}</td>
+                  <td style="text-align:center">
+                    <a [routerLink]="['/event-details', item.Suggestions]" class="ga-btn-img">
+                      <img src="../../assets/view-icon.png" style="width: 15px;" />
+                    </a>
+
+                    <button type="button" class="ga-btn-img" (click)="onEdit(item.Id)">
+                      <img src="../../assets/edit-icon.png" style="width: 15px;" />
+                    </button>
+
+                    <button type="button" class="ga-btn-img" (click)="onDelete(item.Id, i)">
+                      <img src="../../assets/delete-icon.png" style="width: 15px;" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" *ngIf="activeTab==='tab3'">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th style="width: 120px;text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of GoHimalayas;let i = index">
+                  <td>{{item.Title}}</td>
+                  <td style="text-align:center">
+                    <a [routerLink]="['/event-details', item.Suggestions]" class="ga-btn-img">
+                      <img src="../../assets/view-icon.png" style="width: 15px;" />
+                    </a>
+
+                    <button type="button" class="ga-btn-img" (click)="onEdit(item.Id)">
+                      <img src="../../assets/edit-icon.png" style="width: 15px;" />
+                    </button>
+
+                    <button type="button" class="ga-btn-img" (click)="onDelete(item.Id, i)">
+                      <img src="../../assets/delete-icon.png" style="width: 15px;" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" *ngIf="activeTab==='tab4'">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th style="width: 120px;text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of GoCustomise;let i = index">
+                  <td>{{item.Title}}</td>
+                  <td style="text-align:center">
+                    <a [routerLink]="['/event-details', item.Suggestions]" class="ga-btn-img">
+                      <img src="../../assets/view-icon.png" style="width: 15px;" />
+                    </a>
+
+                    <button type="button" class="ga-btn-img" (click)="onEdit(item.Id)">
+                      <img src="../../assets/edit-icon.png" style="width: 15px;" />
+                    </button>
+
+                    <button type="button" class="ga-btn-img" (click)="onDelete(item.Id, i)">
+                      <img src="../../assets/delete-icon.png" style="width: 15px;" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" *ngIf="activeTab==='tab5'">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th style="width: 120px;text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of GoWeekend;let i = index">
+                  <td>{{item.Title}}</td>
+                  <td style="text-align:center">
+                    <a [routerLink]="['/event-details', item.Suggestions]" class="ga-btn-img">
+                      <img src="../../assets/view-icon.png" style="width: 15px;" />
+                    </a>
+
+                    <button type="button" class="ga-btn-img" (click)="onEdit(item.Id)">
+                      <img src="../../assets/edit-icon.png" style="width: 15px;" />
+                    </button>
+
+                    <button type="button" class="ga-btn-img" (click)="onDelete(item.Id, i)">
+                      <img src="../../assets/delete-icon.png" style="width: 15px;" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .table {
+    border: 0;
+  }
+
+  .table thead th {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-bottom: 0 !important;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 10px !important;
+  }
+
+  .table tbody td {
+    font-size: 13px;
+  }
+
+  .ga-btn-img {
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    margin-right: 5px;
+    cursor: pointer !important
+  }
+
+  .ga-event-details-nav-pils {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    border: 0;
+    padding: .7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: -20px !important;
+    background-color: #ff0000;
+    z-index: 1;
+    position: relative;
+    -webkit-border-radius: .25rem;
+    border-radius: .25rem;
+  }
+
+  .ga-event-details-nav-content {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    border: 0;
+    font-weight: 400;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+
+  .ga-event-details-nav-pils .nav-link {
+    padding: 8px 10px;
+    margin-right: 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .ga-event-details-nav-pils .nav-link.active {
+    background-color: white;
+    color: black;
+  }
+</style>

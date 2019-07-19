@@ -1,0 +1,68 @@
+<ngb-carousel *ngIf="images" [interval]="interval" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+  <ng-template ngbSlide *ngFor="let item of images">
+    <div class="ga-carousel-overlay"></div>
+    <img class="ga-carousel-img" [src]="item.image" alt="Random slide">
+    <div class="carousel-caption">
+      <h3 class="ga-carousel-title" [@zoomIn]="zoomIn">{{item.title}}</h3>
+      <p class="ga-carousel-caption">{{item.caption}}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="container-fluid ga-social-connect">
+  <div class="ga-social">
+    <p>Follow us</p>
+    <ul>
+      <li><a href="https://www.facebook.com/goadventureofficial" target="_blank" class="ga-social-facebook"><i class="fab fa-facebook-f"></i></a></li>
+      <li><a href="https://www.instagram.com/goadventureofficial" target="_blank" class="ga-social-instagram"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="#" class="ga-social-twitter"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="https://www.youtube.com/channel/UCjzgE7Qwrs4omfGRkj5xodw" target="_blank" class="ga-social-youtube"><i class="fab fa-youtube"></i></a></li>
+    </ul>
+  </div>
+</div>
+
+<section class="ga-service-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12 ga-service-division animated zoomIn delay-1s">
+        <a routerLink="/go-backpacking" class="ga-services">
+          <div class="animated zoomIn">
+            <img src="../../assets/go-backpacking-icon.png" alt="Go Backpacking">
+            <h1>Go Backpacking</h1>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12 ga-service-division animated zoomIn delay-1s">
+        <a routerLink="/go-himalaya" class="ga-services">
+          <div class="animated zoomIn"> 
+            <img src="../../assets/go-himalaya-icon.png" alt="Go Himalaya">
+            <h1>Go Himalaya</h1>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12 ga-service-division animated zoomIn delay-1s">
+        <a routerLink="/go-international" class="ga-services">
+          <div class="animated zoomIn">
+            <img src="../../assets/go-international-icon.png" alt="Go International">
+            <h1>Go International</h1>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-xs-12 col-sm-12 ga-service-division animated zoomIn delay-1s">
+        <a routerLink="/go-weekend" class="ga-services">
+          <div class="animated zoomIn">
+            <img src="../../assets/go-weekend-icon.png" alt="Go Weekend">
+            <h1>Go Weekend</h1>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

@@ -1,0 +1,33 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-calender-section">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ng-container *ngIf="options">
+          <ng-fullcalendar #fullcalendar [eventsModel]="eventsModel" [options]="options"
+            (eventClick)="eventClick($event)">
+          </ng-fullcalendar>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <ga-footer></ga-footer>
+</section>
+
+<style>
+  .ga-calender-section {
+    padding: 2em 0;
+    position: relative;
+  }
+
+  .fc-event,
+  .fc-event:hover {
+    color: #fff !important;
+  }
+</style>

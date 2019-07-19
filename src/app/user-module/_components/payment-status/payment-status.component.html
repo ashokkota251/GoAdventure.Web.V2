@@ -1,0 +1,41 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<div class="container" style="margin-top: 8%;">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-sm-12 col-md-12">
+      <div class="card ga-payment-status text-center text-capitalize" *ngIf="PaymentStatus.payment_status==='Credit'">
+        <i class="fas fa-check-circle"></i>
+        <h1>Thank You</h1>
+        <p>Order ID : {{PaymentStatus.payment_id}}</p>
+        <p>Payment Status: Success</p>
+        <p>Amount Paid:   {{PaymentTransaction.PaymentReceived}}</p>
+        <p>Amount Due:   {{PaymentTransaction.PaymentPending}}</p>
+        <p>Event: {{SelectedEventDetails.Title}}</p>
+        <p>Date: {{SelectedEventDetails.EventDate.FromDate | date:'mediumDate'}} - {{SelectedEventDetails.EventDate.ToDate | date:'mediumDate'}}</p>
+        <a routerLink="/home">Back to Home</a>
+      </div>
+
+      <div class="card ga-payment-status text-center text-capitalize" *ngIf="PaymentStatus.payment_status==='Failed'">
+        <i class="fas fa-times-circle"></i>
+        <h1 class="ga-payment-failed-title">Your Payment got faild please try again!!</h1>
+        <p>Order ID : {{PaymentStatus.payment_id}}</p>
+        <p>Payment Status: {{PaymentStatus.payment_status}}</p>
+        <p>Amount Due:   {{PaymentTransaction.PaymentPending}}</p>
+        <p>Event: {{SelectedEventDetails.Title}}</p>
+        <p>Date: {{SelectedEventDetails.EventDate.FromDate | date:'mediumDate'}} - {{SelectedEventDetails.EventDate.ToDate | date:'mediumDate'}}</p>
+        <a routerLink="/home">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ga-payment-status{padding:20px}
+  .ga-payment-status i.fa-check-circle{color:green;padding: 25px;font-size: 65px;}
+  .ga-payment-status i.fa-times-circle {color: red;padding: 25px;font-size: 65px;}
+  .ga-payment-status h1{padding:20px}
+  .ga-payment-status p {font-weight: 600;color: #8e8e8e}
+  .ga-payment-failed-title {font-size: 25px;color: red;}
+</style>
