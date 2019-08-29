@@ -44,7 +44,9 @@ export class CreateEventComponent implements OnInit {
       { key: 'Hyderabad', value: 'Hyderabad' },
       { key: 'Bangalore', value: 'Bangalore' },
       { key: 'Pune', value: 'Pune' },
-      { key: 'Kerala', value: 'Kerala' }]
+      { key: 'Kerala', value: 'Kerala' },
+      { key: 'Chennai', value: 'Chennai' },
+    ]
 
     this.EventType = [
       { key: 'Go Backpacking', value: 'Go Backpacking' },

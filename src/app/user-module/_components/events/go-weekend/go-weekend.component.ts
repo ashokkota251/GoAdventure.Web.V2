@@ -12,12 +12,15 @@ import { slider } from '../../../_services/hello-slide';
 })
 export class GoWeekendComponent implements OnInit {
   hyderabadEvents: any = [];
+  bangloreEvents: any = [];
+  chennaiEvents: any = [];
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
     this._userService.get('User/GetAllEvents').subscribe((response) => {
-      this.hyderabadEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City ==='Hyderabad');
+      this.hyderabadEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City === 'Hyderabad');
+      this.bangloreEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City === 'Bangalore');
+      this.chennaiEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City === 'Chennai');
     })
   }
-
 }
