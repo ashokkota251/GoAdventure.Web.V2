@@ -27,69 +27,20 @@ export class CarouselComponent implements OnInit {
 
   images = [
     {
-      image: '../../assets/banner-meghalaya.jpg',
-      title: 'Explore Meghalaya',
-      caption: 'Experience the picturesque 5 day trip to magical Meghalaya, Walk through the Abode of Clouds'
-    },
-    {
       image: '../../assets/banner-spiti.jpg',
       title: 'Explore Spiti',
       caption: 'Experience the aura of Pristine lakes, World’S highest villages'
+    },
+    {
+      image: '../../assets/banner-meghalaya.jpg',
+      title: 'Explore Meghalaya',
+      caption: 'Experience the picturesque 5 day trip to magical Meghalaya, Walk through the Abode of Clouds'
     },
     {
       image: '../../assets/banner-leh.jpg',
       title: 'Explore Leh - Ladakh',
       caption: 'Experience the drive through snow crowned mountains'
     }
-  ];
-
-  images1 = [
-    {
-      image: '../../assets/banner-meghalaya.jpg',
-      title: 'Explore Meghalaya',
-      caption: 'Experience the picturesque 5 day trip to magical Meghalaya, Walk through the Abode of Clouds'
-    },
-    {
-      image: '../../assets/banner-spiti.jpg',
-      title: 'Explore Spiti',
-      caption: 'Experience the aura of Pristine lakes, World’S highest villages'
-    },
-    {
-      image: '../../assets/banner-leh.jpg',
-      title: 'Explore Leh - Ladakh',
-      caption: 'Experience the drive through snow crowned mountains'
-    },
-    {
-      image: '../../assets/banner-meghalaya.jpg',
-      title: 'Explore Meghalaya',
-      caption: 'Experience the picturesque 5 day trip to magical Meghalaya, Walk through the Abode of Clouds'
-    },
-    {
-      image: '../../assets/banner-spiti.jpg',
-      title: 'Explore Spiti',
-      caption: 'Experience the aura of Pristine lakes, World’S highest villages'
-    },
-    {
-      image: '../../assets/banner-leh.jpg',
-      title: 'Explore Leh - Ladakh',
-      caption: 'Experience the drive through snow crowned mountains'
-    },
-    {
-      image: '../../assets/banner-meghalaya.jpg',
-      title: 'Explore Meghalaya',
-      caption: 'Experience the picturesque 5 day trip to magical Meghalaya, Walk through the Abode of Clouds'
-    },
-    {
-      image: '../../assets/banner-spiti.jpg',
-      title: 'Explore Spiti',
-      caption: 'Experience the aura of Pristine lakes, World’S highest villages'
-    },
-    {
-      image: '../../assets/banner-leh.jpg',
-      title: 'Explore Leh - Ladakh',
-      caption: 'Experience the drive through snow crowned mountains'
-    }
-
   ];
 
   constructor(public el: ElementRef) { }

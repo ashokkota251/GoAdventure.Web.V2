@@ -14,7 +14,11 @@ export class GoWeekendComponent implements OnInit {
   hyderabadEvents: any = [];
   bangloreEvents: any = [];
   chennaiEvents: any = [];
-  constructor(private _userService: UserService) { }
+  activeTab: string;
+
+  constructor(private _userService: UserService) {
+    this.activeTab = 'hyderabad';
+  }
 
   ngOnInit() {
     this._userService.get('User/GetAllEvents').subscribe((response) => {
@@ -22,5 +26,9 @@ export class GoWeekendComponent implements OnInit {
       this.bangloreEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City === 'Bangalore');
       this.chennaiEvents = response.filter(x => x.EventType === 'Go Weekends' && x.City === 'Chennai');
     })
+  }
+
+  onClickTabs(tab: string) {
+    this.activeTab = tab;
   }
 }

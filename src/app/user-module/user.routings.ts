@@ -12,6 +12,7 @@ import {
   ReachUsComponent,
   SocialMediaCustomerQueryComponent
 } from './_components/index';
+import { NewYearTripComponent } from './_components/new-year-trip/new-year-trip.component';
 
 
 const userRoutes: Routes = [
@@ -35,6 +36,7 @@ const userRoutes: Routes = [
   { path: 'video-log', component: VideoLogComponent },
   { path: 'reach-us', component: ReachUsComponent },
   { path: 'social-media-customer-query', component: SocialMediaCustomerQueryComponent },
+  { path: 'new-year-trips', component:NewYearTripComponent},
 
   { path: '**', component: HomeComponent }
 ];

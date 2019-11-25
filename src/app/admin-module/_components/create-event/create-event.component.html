@@ -35,6 +35,13 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
+              <label>Custome Url</label>
+              <input type="text" name="CustomeUrl" class="form-control" [(ngModel)]="Event.CustomeUrl">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label>Tile Photo</label>
               <input type="file" class="form-control-file" name="Image" #Image accept="image/*"
                 (change)="handleFileInput($event.target.files)"

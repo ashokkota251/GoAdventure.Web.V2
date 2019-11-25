@@ -1,0 +1,51 @@
+<section>
+  <ga-nav-bar></ga-nav-bar>
+</section>
+
+<section class="ga-events-go-section ga-events-white-bg" style="background-color: #d4d4d433 !important;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm ga-upcomig-events">
+        <!-- <img src="https://stody0yci3-flywheel.netdna-ssl.com/wp-content/uploads/edd/2019/06/2020-07-02.jpg"
+          style="height:250px;width:100%;"> -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm ga-upcomig-events">
+        <h1 class="ga-title-h1">New Year Trips</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let item of newYearTrips">
+        <div class="card">
+          <div class="card-content" style="background-color: #fafcfd;">
+            <div class="card-img">
+              <img alt="Card image cap" class="card-img-top img-fluid" src="{{item.TilePhoto}}"
+                onError="this.src='../../assets/no-image.jpg';">
+              <a [routerLink]="['/event-details',item.CustomeUrl]"
+                class="btn ga-event-book-btn btn-floating halfway-fab"
+                style="background-color: #1cacd7 !important;">Book</a>
+            </div>
+            <div class="card-body">
+              <p class="card-text" style="color: #293042;">{{item.Title}}</p>
+              <div class="event-details" style="color: #293042;">
+                <span class="ga-event-card-date" style="color: #293042;"><i class="far fa-calendar-alt"
+                    style="color: #293042;"></i>
+                  {{item.FromDate | date:'mediumDate'}} - {{item.ToDate | date:'mediumDate'}}</span>
+              </div>
+              <div class="ga-event-card-price" style="    background-color: white;
+              padding: 10px;
+              border: 2px solid #1cacd7 !important;
+              color: black !important;
+              font-weight: 700;">
+                {{item.Price | indianCurrency:true:'1.0':false}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

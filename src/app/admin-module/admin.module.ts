@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {
@@ -26,7 +25,7 @@ import {
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, NgbModule, HttpClientModule, BrowserAnimationsModule, OwlDateTimeModule, OwlNativeDateTimeModule, NgxSummernoteModule, ChartsModule,
+    CommonModule, FormsModule, NgbModule, HttpClientModule, BrowserAnimationsModule, OwlDateTimeModule, OwlNativeDateTimeModule, NgxSummernoteModule,
 
     AdminRountingModule,
 

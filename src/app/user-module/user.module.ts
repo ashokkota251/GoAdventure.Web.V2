@@ -71,6 +71,7 @@ import { VideoGalleryComponent } from './_components/video-gallery/video-gallery
 import { OurLocationComponent } from './_components/our-location/our-location.component';
 import { ContactUsPageBottomComponent } from './_components/contact-us-page-bottom/contact-us-page-bottom.component';
 import { SafePipe } from './_pipes/safe.pipe';
+import { NewYearTripComponent } from './_components/new-year-trip/new-year-trip.component';
 
 @NgModule({
   imports: [
@@ -131,7 +132,8 @@ import { SafePipe } from './_pipes/safe.pipe';
     ReachUsComponent,
     PopularDestinationsComponent, GroupTripsComponent,
     Numbers, Uppercase, IndianCurrency, SafePipe,
-    ReachUsComponent, GalleryComponent, OurBlogsComponent, VideoGalleryComponent, OurLocationComponent, ContactUsPageBottomComponent, SocialMediaCustomerQueryComponent, VideoLogComponent, GoCustomiseComponent
+    ReachUsComponent, GalleryComponent, OurBlogsComponent, VideoGalleryComponent, OurLocationComponent, ContactUsPageBottomComponent, SocialMediaCustomerQueryComponent, VideoLogComponent, GoCustomiseComponent, NewYearTripComponent
+  ,NewYearTripComponent
   ],
   providers: [UserService],
   entryComponents: [

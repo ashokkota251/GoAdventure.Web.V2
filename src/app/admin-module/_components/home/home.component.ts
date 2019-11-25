@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from '../../_services/admin.service';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'ga-home',
@@ -14,7 +11,6 @@ export class AdminHomeComponent implements OnInit {
   WeekendEvents1: any = [];
   WeekendEvents2: any = [];
   WeekendEvents3: any = [];
-  WeekendEvents4: any = [];
 
   DayPaymentCount: number;
   WeekPaymentCount: number;
@@ -22,43 +18,17 @@ export class AdminHomeComponent implements OnInit {
   ChartData: any;
   activeTab: string;
 
-  public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Transactions' }
-  ];
-  public lineChartLabels: Label[] = [];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
-      yAxes: [
-        {
-          id: 'y-axis-0',
-          position: 'left',
-        }
-      ]
-    },
-    annotation: {
-      annotations: [],
-    },
-  };
-  public lineChartLegend = false;
-  public lineChartType = 'line';
-  public lineChartPlugins = [pluginAnnotations];
-
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
-
   constructor(private _adminService: AdminService) {
     this.activeTab = 'tab1';
   }
 
   ngOnInit() {
     this._adminService.get('Events/GetComingWeekEndReport').subscribe((response) => {
+      debugger;
       this.comingWeekendEvents = response["Coming Weekend Events"];
-      // this.WeekendEvents1 = response["June Month Events"];
-      this.WeekendEvents2 = response["July Month Events"];
-      this.WeekendEvents3 = response["August Month Events"];
-      this.WeekendEvents4 = response["September Month Events"];
+      // this.WeekendEvents1 = response["October Month Events"];
+      this.WeekendEvents2 = response["November Month Events"];
+      this.WeekendEvents3 = response["December Month Events"];
     })
 
     this._adminService.get('Events/GetPaymentCount').subscribe((response) => {
@@ -75,7 +45,7 @@ export class AdminHomeComponent implements OnInit {
     })
   }
 
-  onClickTabs(tab:string){
-    this.activeTab=tab;
+  onClickTabs(tab: string) {
+    this.activeTab = tab;
   }
 }

@@ -9,20 +9,20 @@
         <div class="col-lg-12">
           <ul class="nav nav-pills mb-3 ga-event-details-nav-pils" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link"  [ngClass]="{'active': activeTab==='tab1'}" (click)="onClickTabs('tab1')">Coming Weekend Events</a>
+              <a class="nav-link" [ngClass]="{'active': activeTab==='tab1'}" (click)="onClickTabs('tab1')">Coming
+                Weekend Events</a>
             </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': activeTab==='tab2'}" (click)="onClickTabs('tab2')">October Events</a>
+            </li> -->
+
             <li class="nav-item">
-              <a class="nav-link" [ngClass]="{'active': activeTab==='tab2'}" (click)="onClickTabs('tab2')">July Events</a>
+              <a class="nav-link"  [ngClass]="{'active': activeTab==='tab3'}" (click)="onClickTabs('tab3')">November Events</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link"  [ngClass]="{'active': activeTab==='tab3'}" (click)="onClickTabs('tab3')">August Events</a>
+              <a class="nav-link"  [ngClass]="{'active': activeTab==='tab4'}" (click)="onClickTabs('tab4')">December Events</a>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link"  [ngClass]="{'active': activeTab==='tab4'}" (click)="onClickTabs('tab4')">September Events</a>
-            </li>
-
           </ul>
           <div class="tab-content card ga-event-details-nav-content" id="pills-tabContent"
             style="max-height: 500px;overflow-y: auto;">
@@ -60,7 +60,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of WeekendEvents2;let i = index">
+                  <tr *ngFor="let item of WeekendEvents1;let i = index">
                     <th scope="row">{{i+1}}</th>
                     <td>{{item.Title}}</td>
                     <td>{{item.FromDate | date:'mediumDate'}} - {{item.ToDate | date:'mediumDate'}}</td>
@@ -82,7 +82,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of WeekendEvents3;let i = index">
+                  <tr *ngFor="let item of WeekendEvents2;let i = index">
                     <th scope="row">{{i+1}}</th>
                     <td>{{item.Title}}</td>
                     <td>{{item.FromDate | date:'mediumDate'}} - {{item.ToDate | date:'mediumDate'}}</td>
@@ -97,14 +97,14 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" style="width: 42%;">Event Name</th>
+                    <th scope="col" style="width: 45%;">Event Name</th>
                     <th scope="col">Date</th>
                     <th scope="col">Total slots</th>
                     <th scope="col">Booked slots</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of WeekendEvents4;let i = index">
+                  <tr *ngFor="let item of WeekendEvents3;let i = index">
                     <th scope="row">{{i+1}}</th>
                     <td>{{item.Title}}</td>
                     <td>{{item.FromDate | date:'mediumDate'}} - {{item.ToDate | date:'mediumDate'}}</td>

@@ -50,7 +50,10 @@ export class EditEventComponent implements OnInit {
       { key: 'Hyderabad', value: 'Hyderabad' },
       { key: 'Bangalore', value: 'Bangalore' },
       { key: 'Pune', value: 'Pune' },
-      { key: 'Kerala', value: 'Kerala' }]
+      { key: 'Kerala', value: 'Kerala' },
+      { key: 'Chennai', value: 'Chennai' },
+      { key: 'Delhi', value: 'Delhi' }
+    ];
 
     this.EventType = [
       { key: 'Go Backpacking', value: 'Go Backpacking' },
